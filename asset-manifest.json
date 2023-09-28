@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/ArgProgAPI/static/css/main.fdabf84b.css",
-    "main.js": "/ArgProgAPI/static/js/main.a886fb52.js",
+    "main.css": "/ArgProgAPI/static/css/main.6bd07d22.css",
+    "main.js": "/ArgProgAPI/static/js/main.aaf4fe3e.js",
     "index.html": "/ArgProgAPI/index.html",
-    "main.fdabf84b.css.map": "/ArgProgAPI/static/css/main.fdabf84b.css.map",
-    "main.a886fb52.js.map": "/ArgProgAPI/static/js/main.a886fb52.js.map"
+    "main.6bd07d22.css.map": "/ArgProgAPI/static/css/main.6bd07d22.css.map",
+    "main.aaf4fe3e.js.map": "/ArgProgAPI/static/js/main.aaf4fe3e.js.map"
   },
   "entrypoints": [
-    "static/css/main.fdabf84b.css",
-    "static/js/main.a886fb52.js"
+    "static/css/main.6bd07d22.css",
+    "static/js/main.aaf4fe3e.js"
   ]
 }
