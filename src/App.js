@@ -1,10 +1,13 @@
-import logo from './logo.svg';
+// src/App.js
+
+import React from 'react';
 import './App.css';
+import WeatherDashboard from './components/WeatherDashboard';
 
 function App() {
   return (
     <div className="App">
-      HOLA
+      <WeatherDashboard />
     </div>
   );
 }

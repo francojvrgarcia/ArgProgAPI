@@ -1,13 +1,58 @@
-body {
+/* CSS RESET */
+*,
+*::before,
+*::after {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* CSS VARIABLES */
+
+:root {
+  --color-primary: #1b262c;
+  --color-secondary: #24353e;
+  --color-accent: #00b4d8;
+
+  --color-text-primary: #caf0f8;
+  --color-text-secondary: #495057;
+
+  --color-blue-dark: rgba(2, 62, 138, 1);
+  --color-blue-medium: rgba(0, 119, 182, 1);
+  --color-blue-light: rgba(0, 150, 199, 1);
+
+  --color-white: #fff;
+  --color-black: #000;
 }
