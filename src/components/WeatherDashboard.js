@@ -184,49 +184,55 @@ function HumidityCard({ title, data }) {
   );
 }
 
-
 function TemperatureClock() {
-  const [currentTemperature, setCurrentTemperature] = useState(0); // Temperatura inicial
-
-  // Simula la obtención de datos de temperatura (reemplaza con la lógica de tu API)
-  const fetchTemperatureData = async () => {
-    // Realiza una solicitud HTTP para obtener los datos de temperatura
-    // Reemplaza esto con la lógica real de obtención de datos
-    const response = await fetch('URL_DE_TU_API');
-    const data = await response.json();
-    const temperature = data.temperature; // Ajusta esto según tu API
-    setCurrentTemperature(temperature);
-  };
-
-  useEffect(() => {
-    // Llama a la función para obtener los datos de temperatura cuando se monta el componente
-    fetchTemperatureData();
-    // Configura un temporizador para actualizar la temperatura periódicamente (opcional)
-    const timer = setInterval(fetchTemperatureData, 60000); // Actualiza cada minuto
-    return () => clearInterval(timer); // Limpia el temporizador al desmontar el componente
-  }, []);
+  const [currentTemperature, setCurrentTemperature] = useState(10); // Temperatura inicial (apunta al norte)
 
   // Calcula el ángulo de la aguja del reloj basado en la temperatura actual
-  const needleAngle = (currentTemperature / 40) * 360; // Ejemplo: 0-360 grados para temperaturas de 0 a 40°C
+  const minTemperature = -30; // Temperatura mínima (apunta al sur)
+  const maxTemperature = 40; // Temperatura máxima (apunta al oeste)
+  const angleMin = -150; // Ángulo mínimo correspondiente a -30°C
+  const angleMax = 150; // Ángulo máximo correspondiente a 40°C
+
+  // Temperatura inicial para la aguja (-20°C)
+  const initialTemperature = -20;
+
+  // Calcula el ángulo inicial de la aguja del reloj
+  const initialNormalizedTemperature = Math.min(Math.max(initialTemperature, minTemperature), maxTemperature);
+  const initialTemperaturePercentage = (initialNormalizedTemperature - minTemperature) / (maxTemperature - minTemperature);
+  const initialNeedleAngle = angleMin + initialTemperaturePercentage * (angleMax - angleMin);
 
   return (
     <div className="temperature-clock">
       <h3>Reloj de Temperatura para Hoy</h3>
       <div className="clock-container">
-        {/* Crea el diseño visual del reloj y la aguja */}
         <div className="clock">
+          {/* Agregar el círculo central */}
+          <div className="center-circle"></div>
+          {/* Agregar la aguja del reloj de temperatura */}
           <div
-            className="needle"
-            style={{ transform: `translateX(-50%) rotate(${needleAngle}deg)` }}
-          >
-            {currentTemperature}°C
+            className="temperature-needle"
+            style={{
+              transform: `translateX(-50%) rotate(${initialNeedleAngle}deg)`,
+            }}
+          ></div>
+          {/* Etiqueta para mostrar la temperatura actual */}
+          <div className="temperature-label">
+            {initialTemperature}°C
           </div>
+          {/* Números para indicar las temperaturas en el reloj */}
+          <div className="temperature-number-north">10°C</div>
+          <div className="temperature-number-west">-10°C</div>
+          <div className="temperature-number-south">-30°C</div>
+          <div className="temperature-number-east">40°C</div>
         </div>
-        <div className="temperature-label">Temperatura</div>
       </div>
     </div>
   );
 }
+
+
+
+
 function TemperatureMinMaxCard({ maxTemperature, minTemperature }) {
   return (
     <div className="temperature-min-max-card">

@@ -75,6 +75,7 @@
 .temperature-chart-small {
   height: 500px; /* Ajusta la altura a tu preferencia */
 }
+
 .humidity-chart-small {
   height: 500px; /* Ajusta la altura a tu preferencia */
 }
@@ -85,12 +86,16 @@
   gap: 10px; /* Espacio entre tarjetas */
   grid-template-rows: repeat(2, auto); /* Dos filas de alto automático */
 }
+
 /* Estilos para cada tarjeta de humedad */
 .humidity-card {
-  width: calc(33.33% - 16px); /* Ancho del 33.33% menos el espacio entre las tarjetas */
-  /* Agrega otros estilos según sea necesario */
+  border: 1px solid #ccc; /* Borde de 1 píxel de color gris claro */
+  padding: 10px; /* Espaciado interno */
+  margin: 10px; /* Espaciado externo */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  background-color: #fff; /* Fondo blanco */
 }
-
 
 /* Estilos para el reloj de temperatura */
 .temperature-clock {
@@ -132,20 +137,180 @@
   font-weight: bold;
 }
 
-.card {
-  border: 1px solid #ccc; /* Borde de 1 píxel de color gris claro */
-  padding: 10px; /* Espaciado interno */
-  margin: 10px; /* Espaciado externo */
-  border-radius: 5px; /* Bordes redondeados */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-  background-color: #fff; /* Fondo blanco */
+/* Estilos para los valores de temperatura máxima y mínima */
+.temperature-min-max-card {
+  text-align: center;
+  margin: 20px;
 }
 
-.humidity-card {
-  border: 1px solid #ccc; /* Borde de 1 píxel de color gris claro */
-  padding: 10px; /* Espaciado interno */
-  margin: 10px; /* Espaciado externo */
-  border-radius: 5px; /* Bordes redondeados */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-  background-color: #fff; /* Fondo blanco */
+.temperature-values {
+  display: flex;
+  justify-content: space-between;
+}
+
+.max-temperature-card,
+.min-temperature-card {
+  width: 100px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.max-temperature-label,
+.min-temperature-label {
+  font-size: 14px;
+}
+
+.max-temperature-value,
+.min-temperature-value {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+.temperature-clock {
+  text-align: center;
+  margin: 20px;
+}
+
+.clock-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  overflow: hidden; /* Para ocultar la aguja que sobresale del círculo */
+}
+
+.clock {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* Agrega bordes redondeados */
+}
+
+.needle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: 50% 0;
+  transform: translateX(-50%) rotate(0deg);
+  transition: transform 0.5s ease;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: red; /* Agrega color de fondo */
+  border-radius: 2px; /* Agrega bordes redondeados a la aguja */
+  width: 4px; /* Ancho de la aguja */
+  height: 50%; /* Altura de la aguja */
+}
+
+.temperature-label {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+
+
+.analog-clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.clock {
+  width: 200px;
+  height: 200px;
+  border: 2px solid #333;
+  border-radius: 50%;
+  position: relative;
+}
+
+.hour-hand,
+.minute-hand,
+.second-hand {
+  position: absolute;
+  transform-origin: center bottom;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+}
+
+.hour-hand {
+  width: 4px;
+  height: 40px;
+  z-index: 3;
+}
+
+.minute-hand {
+  width: 4px;
+  height: 60px;
+  z-index: 2;
+}
+
+.second-hand {
+  width: 2px;
+  height: 70px;
+  background-color: red;
+  z-index: 1;
+}
+
+.center-circle {
+  width: 12px;
+  height: 12px;
+  background-color: #333;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+}
+
+/* Estilos para los números de temperatura */
+.temperature-number-north,
+.temperature-number-west,
+.temperature-number-south,
+.temperature-number-east {
+  position: absolute;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.temperature-number-north {
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.temperature-number-west {
+  top: 50%;
+  left: 5%; /* Ajusta el valor izquierdo para separarlos más del borde */
+  transform: translateY(-50%);
+}
+
+.temperature-number-south {
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.temperature-number-east {
+  top: 50%;
+  right: 5%; /* Ajusta el valor derecho para separarlos más del borde */
+  transform: translateY(-50%);
+}
+
+.bottom-left {
+  position: absolute;
+  bottom: 0; /* Coloca el componente en la parte inferior */
+  left: 20px; /* Ajusta el valor izquierdo según tus preferencias */
 }
