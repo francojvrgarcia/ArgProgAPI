@@ -80,14 +80,72 @@
 }
 
 .humidity-grid {
-  display: flex;
-  flex-wrap: wrap; /* Para que los elementos se envuelvan en filas */
-  justify-content: space-between; /* Distribuir uniformemente los elementos en el espacio disponible */
-  gap: 16px; /* Espacio entre las tarjetas */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas de igual tamaño */
+  gap: 10px; /* Espacio entre tarjetas */
+  grid-template-rows: repeat(2, auto); /* Dos filas de alto automático */
 }
-
 /* Estilos para cada tarjeta de humedad */
 .humidity-card {
   width: calc(33.33% - 16px); /* Ancho del 33.33% menos el espacio entre las tarjetas */
   /* Agrega otros estilos según sea necesario */
+}
+
+
+/* Estilos para el reloj de temperatura */
+.temperature-clock {
+  text-align: center;
+}
+
+.clock-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+}
+
+.clock {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.needle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: 50% 0;
+  transform: translateX(-50%) rotate(0deg);
+  transition: transform 0.5s ease;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.temperature-label {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.card {
+  border: 1px solid #ccc; /* Borde de 1 píxel de color gris claro */
+  padding: 10px; /* Espaciado interno */
+  margin: 10px; /* Espaciado externo */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  background-color: #fff; /* Fondo blanco */
+}
+
+.humidity-card {
+  border: 1px solid #ccc; /* Borde de 1 píxel de color gris claro */
+  padding: 10px; /* Espaciado interno */
+  margin: 10px; /* Espaciado externo */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  background-color: #fff; /* Fondo blanco */
 }

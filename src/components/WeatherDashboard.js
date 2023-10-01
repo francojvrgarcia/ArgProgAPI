@@ -4,6 +4,9 @@ import { Line, Bar } from 'react-chartjs-2';
 import Chart from 'chart.js/auto'; // Asegúrate de importar 'chart.js/auto'
 import 'chartjs-adapter-moment'; // Si es necesario para tu versión de Chart.js
 import moment from 'moment'; // Importa moment.js
+import Clock from 'react-minimal-pie-chart';
+
+
 
 function WeatherDashboard() {
   const [weatherData, setWeatherData] = useState(null);
@@ -32,7 +35,18 @@ function WeatherDashboard() {
       <div className="left-panel">
         {/* Contenido del panel izquierdo */}
         <h2></h2>
-        {/* Agrega contenido según tus necesidades */}
+        <div className="top-left">
+            <TemperatureClock/>
+        </div>
+        <div className="bottom-left">
+          {/* Agregar el TemperatureMinMaxCard en la parte inferior izquierda */}
+          {weatherData && weatherData.hourly && (
+            <TemperatureMinMaxCard
+              maxTemperature={Math.max(...weatherData.hourly.temperature_2m)}
+              minTemperature={Math.min(...weatherData.hourly.temperature_2m)}
+            />
+          )}
+        </div>
       </div>
       <div className="right-panel">
         {weatherData && weatherData.hourly && (
@@ -49,13 +63,19 @@ function WeatherDashboard() {
               {/* Contenido del panel inferior del lado derecho */}
               <h2>Highlights</h2>
               <div className="humidity-grid">
-              <HumidityCard data={weatherData.hourly}/>
-              <HumidityCard data={weatherData.hourly}/>
-              <HumidityCard data={weatherData.hourly}/>
-              <HumidityCard data={weatherData.hourly}/>
-              <HumidityCard data={weatherData.hourly}/>
-              <HumidityCard data={weatherData.hourly}/>
-            </div>
+                {/* UV INDEX */}
+                <HumidityCard title="UV INDEX" data={weatherData.hourly} />
+                {/* WIND STATUS */}
+                <HumidityCard title="WIND STATUS" data={weatherData.hourly} />
+                {/* SUNRISE & SUNSET */}
+                <HumidityCard title="SUNRISE & SUNSET" data={weatherData.hourly} />
+                {/* HUMIDITY */}
+                <HumidityCard title="HUMIDITY" data={weatherData.hourly} />
+                {/* VISIBILITY */}
+                <HumidityCard title="VISIBILITY" data={weatherData.hourly} />
+                {/* AIR QUALITY */}
+                <HumidityCard title="AIR QUALITY" data={weatherData.hourly} />
+              </div>
             </div>
           </>
         )}
@@ -118,7 +138,7 @@ function TemperatureChart({ timeLabels, temperatureData }) {
   );
 }
 
-function HumidityCard({ data }) {
+function HumidityCard({ title, data }) {
   console.log('datahum', data)
   const [currentHumidity, setCurrentHumidity] = useState(null);
 
@@ -148,7 +168,7 @@ function HumidityCard({ data }) {
 
   return (
     <div className={`humidity-card ${isNormal ? 'normal' : 'not-normal'}`}>
-      <h3>Humedad de Hoy</h3>
+      <h3>{title}</h3>
       <div className="humidity-reading">
         <div className="humidity-value">{currentHumidity !== null ? `${currentHumidity}%` : 'N/A'}</div>
         <div className="humidity-icon">
@@ -163,6 +183,68 @@ function HumidityCard({ data }) {
     </div>
   );
 }
+
+
+function TemperatureClock() {
+  const [currentTemperature, setCurrentTemperature] = useState(0); // Temperatura inicial
+
+  // Simula la obtención de datos de temperatura (reemplaza con la lógica de tu API)
+  const fetchTemperatureData = async () => {
+    // Realiza una solicitud HTTP para obtener los datos de temperatura
+    // Reemplaza esto con la lógica real de obtención de datos
+    const response = await fetch('URL_DE_TU_API');
+    const data = await response.json();
+    const temperature = data.temperature; // Ajusta esto según tu API
+    setCurrentTemperature(temperature);
+  };
+
+  useEffect(() => {
+    // Llama a la función para obtener los datos de temperatura cuando se monta el componente
+    fetchTemperatureData();
+    // Configura un temporizador para actualizar la temperatura periódicamente (opcional)
+    const timer = setInterval(fetchTemperatureData, 60000); // Actualiza cada minuto
+    return () => clearInterval(timer); // Limpia el temporizador al desmontar el componente
+  }, []);
+
+  // Calcula el ángulo de la aguja del reloj basado en la temperatura actual
+  const needleAngle = (currentTemperature / 40) * 360; // Ejemplo: 0-360 grados para temperaturas de 0 a 40°C
+
+  return (
+    <div className="temperature-clock">
+      <h3>Reloj de Temperatura para Hoy</h3>
+      <div className="clock-container">
+        {/* Crea el diseño visual del reloj y la aguja */}
+        <div className="clock">
+          <div
+            className="needle"
+            style={{ transform: `translateX(-50%) rotate(${needleAngle}deg)` }}
+          >
+            {currentTemperature}°C
+          </div>
+        </div>
+        <div className="temperature-label">Temperatura</div>
+      </div>
+    </div>
+  );
+}
+function TemperatureMinMaxCard({ maxTemperature, minTemperature }) {
+  return (
+    <div className="temperature-min-max-card">
+      <h3>Temperatura Máxima y Mínima</h3>
+      <div className="temperature-values">
+        <div className="max-temperature-card card">
+          <div className="max-temperature-label">Máxima</div>
+          <div className="max-temperature-value">{maxTemperature}°C</div>
+        </div>
+        <div className="min-temperature-card card">
+          <div className="min-temperature-label">Mínima</div>
+          <div className="min-temperature-value">{minTemperature}°C</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 
 export default WeatherDashboard;
