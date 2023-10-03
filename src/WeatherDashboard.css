@@ -150,8 +150,12 @@
 
 .max-temperature-card,
 .min-temperature-card {
-  width: 100px;
-  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column; /* Alinea el contenido verticalmente */
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  width: 200px;
+  height: 200px;
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 5px;
@@ -159,12 +163,12 @@
 
 .max-temperature-label,
 .min-temperature-label {
-  font-size: 14px;
+  font-size: 24px;
 }
 
 .max-temperature-value,
 .min-temperature-value {
-  font-size: 16px;
+  font-size: 24px;
   font-weight: bold;
 }
 
