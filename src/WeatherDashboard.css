@@ -2,15 +2,14 @@
 
 .weather-dashboard {
   display: flex;
-  height: 100vh;
 }
 
 .left-panel {
-  flex: 1;
+  flex: 1 1;
   background-color: #f0f0f0;
   padding: 20px;
+  position: relative; /* Agrega esta línea */
 }
-
 .right-panel {
   flex: 3;
   display: flex;
@@ -31,11 +30,6 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
-.weather-info {
-  /* Estilos para la información del clima en el panel superior derecho */
-}
-
-/* Estilos para dividir el panel superior e inferior del lado derecho */
 .right-panel {
   flex: 3;
   display: flex;
@@ -97,10 +91,7 @@
   background-color: #fff; /* Fondo blanco */
 }
 
-/* Estilos para el reloj de temperatura */
-.temperature-clock {
-  text-align: center;
-}
+
 
 .clock-container {
   position: relative;
@@ -128,14 +119,13 @@
   font-weight: bold;
 }
 
-.temperature-label {
-  position: absolute;
-  top: 80%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  font-weight: bold;
+.temperature-clock {
+  text-align: center;
+  margin: 20px;
+  position: relative; /* Agrega esta línea para controlar la posición del CurrentTemperature */
 }
+
+
 
 /* Estilos para los valores de temperatura máxima y mínima */
 .temperature-min-max-card {
@@ -148,18 +138,30 @@
   justify-content: space-between;
 }
 
+/* Estilos base para .max-temperature-card y .min-temperature-card */
 .max-temperature-card,
 .min-temperature-card {
   display: flex;
   flex-direction: column; /* Alinea el contenido verticalmente */
   justify-content: center; /* Centra verticalmente */
   align-items: center; /* Centra horizontalmente */
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 5px;
 }
+
+/* Estilos para pantallas más pequeñas (por ejemplo, dispositivos móviles) */
+@media (max-width: 768px) {
+  .max-temperature-card,
+  .min-temperature-card {
+    width: 100px; /* Ajusta el tamaño para pantallas más pequeñas si es necesario */
+    height: 100px; /* Ajusta el tamaño para pantallas más pequeñas si es necesario */
+    font-size: 14px; /* Ajusta el tamaño de la fuente para pantallas más pequeñas si es necesario */
+  }
+}
+
 
 .max-temperature-label,
 .min-temperature-label {
@@ -314,7 +316,15 @@
 }
 
 .bottom-left {
-  position: absolute;
+  position:absolute;
   bottom: 0; /* Coloca el componente en la parte inferior */
   left: 20px; /* Ajusta el valor izquierdo según tus preferencias */
+}
+
+.current-date-time {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 220px; /* Ajusta el margen superior según tus necesidades */
+  color: #333;
+  text-align: center;
 }

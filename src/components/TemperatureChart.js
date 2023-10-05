@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { Bar } from 'react-chartjs-2';
+import 'chartjs-adapter-moment';
 
 
 function TemperatureChart({ timeLabels, temperatureData }) {
@@ -51,7 +52,6 @@ function TemperatureChart({ timeLabels, temperatureData }) {
  
    return (
      <div className="temperature-chart temperature-chart-small">
-       <h3>Gráfico de Temperatura para Hoy</h3>
        <Bar data={chartData} options={chartOptions} />
      </div>
    );
