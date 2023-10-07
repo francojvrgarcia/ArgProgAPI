@@ -2,15 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
-function HumidityCard({ title, value, sunrise, sunset, data }) {
+function HighlightCard({ title, value, sunrise, sunset, data }) {
   const [currentHumidity, setCurrentHumidity] = useState(null);
+  const [currentVisibility, setCurrentVisibility] = useState(null);
 
   const getCurrentHumidity = () => {
     if (title === 'HUMIDITY' && data) {
-      const currentTime = new Date().toISOString(); // Obtén la hora actual en formato ISO
-
+      const targetDate = moment('2023-10-03T12:00:00');
+      const currentTime = targetDate.toISOString();
       const index = data.time.findIndex((time) => {
-        // Compara la hora actual con las horas en data.time
         return moment(currentTime).isSame(time, 'hour');
       });
 
@@ -20,26 +20,45 @@ function HumidityCard({ title, value, sunrise, sunset, data }) {
     }
   };
 
+  const formatTime = (timeString) => {
+    return moment(timeString, 'HH:mm').format('h:mm A');
+  };
+  
+  const getVisibilityForDate = () => {
+ 
+    if (title === 'VISIBILITY' && data) {
+      const targetDate =  moment('2023-10-03T12:00:00');
+      const currentTime = targetDate.toISOString();
+      const index = data.time.findIndex((time) => {
+        return moment(currentTime).isSame(time, 'hour');
+      });
+
+      if (index !== -1) {
+        const visibilityInMeters = data.visibility[index];
+        const visibilityInKilometers = visibilityInMeters / 1000;
+        setCurrentVisibility(`${visibilityInKilometers.toFixed(1)} km`);
+      }
+    }
+  };
+
   // Llama a la función para obtener la humedad actual cuando se monta el componente
   useEffect(() => {
     getCurrentHumidity();
+    getVisibilityForDate();
   }, [data, title]);
 
   // Verificar si la humedad es normal o no (ajusta los valores según tus criterios)
   const isNormal =
-    (title === 'HUMIDITY' && currentHumidity !== null && currentHumidity >= 30 && currentHumidity <= 70) ||
-    (title === 'UV INDEX' && value === 6) ||
-    (title === 'WIND STATUS' && value === '11.12km') ||
-    (title === 'SUNRISE & SUNSET' && sunrise === '6:35 AM' && sunset === '5:42 AM') ||
-    (title === 'VISIBILITY' && value === '6.1km') ||
-    (title === 'AIR QUALITY' && value === 105);
+    (title === 'HUMIDITY' && currentHumidity !== null && currentHumidity >= 30 && currentHumidity <= 70);
 
   return (
     <div className={`humidity-card ${isNormal ? 'normal' : 'not-normal'}`}>
       <h3>{title}</h3>
       {title === 'HUMIDITY' && (
         <div className="humidity-reading">
-          <div className="humidity-value">{currentHumidity !== null ? `${currentHumidity}%` : 'N/A'}</div>
+          <div className="humidity-value">
+            {currentHumidity !== null ? `${currentHumidity}%` : 'N/A'}
+          </div>
           <div className="humidity-icon">
             <span role="img" aria-label="Termómetro">
               🌡️
@@ -51,12 +70,12 @@ function HumidityCard({ title, value, sunrise, sunset, data }) {
       {title === 'WIND STATUS' && <div className="humidity-value">{value}</div>}
       {title === 'SUNRISE & SUNSET' && (
         <div className="humidity-value">
-          Sunrise: {sunrise}
+          ▲ {moment(sunrise[0]).format('h:mm A')}  
           <br />
-          Sunset: {sunset}
+          ▼ {moment(sunset[0]).format('h:mm A')} 
         </div>
       )}
-      {title === 'VISIBILITY' && <div className="humidity-value">{value}</div>}
+      {title === 'VISIBILITY' && <div className="humidity-value">{value || currentVisibility}</div>}
       {title === 'AIR QUALITY' && <div className="humidity-value">{value}</div>}
       <div className="humidity-status">
         {currentHumidity !== null ? (isNormal ? 'Normal' : '') : ''}
@@ -65,4 +84,4 @@ function HumidityCard({ title, value, sunrise, sunset, data }) {
   );
 }
 
-export default HumidityCard;
+export default HighlightCard;

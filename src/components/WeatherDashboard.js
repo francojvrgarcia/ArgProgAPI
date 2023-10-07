@@ -3,19 +3,25 @@ import '../WeatherDashboard.css';
 import { Line, Bar } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-moment';
-import moment from 'moment';
 import Clock from 'react-minimal-pie-chart';
 
 // Importa los componentes que has separado en archivos individuales
 import TemperatureMinMaxCard from './TemperatureMinMaxCard';
 import TemperatureClock from './TemperatureClock';
-import HumidityCard from './HumidityCard';
+import HighlightCard from './HighlightCard';
 import TemperatureChart from './TemperatureChart';
+import moment from 'moment';
+
+import apiData from './api.json';
 
 function WeatherDashboard() {
-  const [weatherData, setWeatherData] = useState(null);
+  //const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState(apiData);
+  //const currentDateTime = moment().format('MMMM D, YYYY h:mm A');
+  const currentDateTime = moment(weatherData.current_weather.time).format('MMMM D, YYYY h:mm A');
 
-  useEffect(() => {
+ 
+/*   useEffect(() => {
     // Realiza la solicitud HTTP a la API utilizando fetch
     fetch('https://api.open-meteo.com/v1/forecast?latitude=-31.4135&longitude=-64.181&hourly=temperature_2m,relativehumidity_2m')
       .then((response) => {
@@ -32,10 +38,8 @@ function WeatherDashboard() {
       .catch((error) => {
         console.error('Error al obtener datos de la API:', error);
       });
-  }, []);
+  }, []); */
 
-  // Obtener la fecha y hora actual en formato legible
-  const currentDateTime = moment().format('MMMM D, YYYY h:mm A');
 
   return (
     <div className="weather-dashboard">
@@ -43,7 +47,7 @@ function WeatherDashboard() {
         {/* Contenido del panel izquierdo */}
         <h2></h2>
         <div className="top-left">
-          <TemperatureClock />
+          <TemperatureClock currentTemperature={weatherData.current_weather.temperature} />
           {/* Agrega aquí la fecha y hora actual */}
           <div className="current-date-time">
             {currentDateTime}
@@ -75,17 +79,17 @@ function WeatherDashboard() {
               <h2>Highlights</h2>
               <div className="humidity-grid">
                 {/* UV INDEX */}
-                <HumidityCard title="UV INDEX" value={6} />
+                <HighlightCard title="UV INDEX" value={weatherData.daily.uv_index_max} />
                 {/* WIND STATUS */}
-                <HumidityCard title="WIND STATUS" value="11.12km" />
+                <HighlightCard title="WIND STATUS" value={weatherData.current_weather.windspeed + ' km/h'}/>
                 {/* SUNRISE & SUNSET */}
-                <HumidityCard title="SUNRISE & SUNSET" sunrise="6:35 AM" sunset="5:42 AM" />
+                <HighlightCard title="SUNRISE & SUNSET" sunrise={weatherData.daily.sunrise} sunset={weatherData.daily.sunset}  />
                 {/* HUMIDITY */}
-                <HumidityCard title="HUMIDITY" data={weatherData.hourly} />
+                <HighlightCard title="HUMIDITY" data={weatherData.hourly} />
                 {/* VISIBILITY */}
-                <HumidityCard title="VISIBILITY" value="6.1km" />
+                <HighlightCard title="VISIBILITY" data={weatherData.hourly}/>
                 {/* AIR QUALITY */}
-                <HumidityCard title="AIR QUALITY" value={105} />
+                <HighlightCard title="AIR QUALITY" value={105} />
               </div>
             </div>
           </>

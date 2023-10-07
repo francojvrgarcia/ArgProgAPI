@@ -2,8 +2,9 @@ import React from 'react';
 import moment from 'moment'; // Importa la librería moment
 
 function TemperatureMinMaxCard({ maxTemperature, minTemperature }) {
-  // Obtiene la fecha y hora actual usando moment
-  const currentDateTime = moment().format('dddd, MMMM Do YYYY, h:mm:ss a');
+  
+   console.log('max', maxTemperature);
+   console.log('min', minTemperature)
 
   // Calcula un color de fondo degradado en función de la temperatura máxima y mínima
   const gradientColor = `linear-gradient(90deg, #FF5733 ${maxTemperature}%, #e5a733 ${minTemperature}%)`;

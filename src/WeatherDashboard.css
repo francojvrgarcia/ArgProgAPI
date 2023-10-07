@@ -1,4 +1,11 @@
 /* WeatherDashboard.css */
+body {
+  background: linear-gradient(to bottom, #87ceeb, #1e90ff);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
 
 .weather-dashboard {
   display: flex;
@@ -6,7 +13,6 @@
 
 .left-panel {
   flex: 1 1;
-  background-color: #f0f0f0;
   padding: 20px;
   position: relative; /* Agrega esta línea */
 }
@@ -18,14 +24,12 @@
 
 .top-right {
   flex: 1;
-  background-color: #ffffff;
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
 .bottom-right {
   flex: 3;
-  background-color: #ffffff;
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
@@ -38,14 +42,15 @@
 
 .top-right {
   flex: 1;
-  background-color: #ffffff;
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
-.temperature-chart {
-  text-align: center;
-  margin: 20px;
+.temperature-chart-container {
+  display: flex;
+  justify-content: center;
+  height: 400px;
+  background: linear-gradient(to bottom, #FFD700, #FFA500); /* Colores degradados de oro a naranja */
 }
 
 .chart {
@@ -66,13 +71,7 @@
   transition: height 0.3s ease; /* Agrega una animación de transición */
 }
 
-.temperature-chart-small {
-  height: 500px; /* Ajusta la altura a tu preferencia */
-}
 
-.humidity-chart-small {
-  height: 500px; /* Ajusta la altura a tu preferencia */
-}
 
 .humidity-grid {
   display: grid;
@@ -327,4 +326,11 @@
   margin-top: 220px; /* Ajusta el margen superior según tus necesidades */
   color: #333;
   text-align: center;
+}
+
+.humidity-value {
+  font-size: 24px; /* Tamaño de fuente más grande */
+  background: linear-gradient(to right, #00bfff, #87cefa); /* Color degradado de cielo */
+  -webkit-background-clip: text; /* Hace que el color de fondo degradado aplique al texto */
+  color: transparent; /* Hace que el texto sea transparente */
 }
