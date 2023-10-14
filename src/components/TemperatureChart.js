@@ -8,7 +8,7 @@ function TemperatureChart({ timeLabels, temperatureData }) {
   const currentDate = moment().format('YYYY-MM-DD');
 
   // Filtra los datos para obtener solo las horas del día actual
-  const filteredTimeLabels = timeLabels.filter((time) => time.startsWith('2023-10-03'));
+  const filteredTimeLabels = timeLabels.filter((time) => time.startsWith(currentDate ));
 
   // Filtra los datos de temperatura correspondientes a las horas del día actual
   const filteredTemperatureData = filteredTimeLabels.map((filteredTime) => {

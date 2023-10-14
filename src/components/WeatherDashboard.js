@@ -15,15 +15,15 @@ import moment from 'moment';
 import apiData from './api.json';
 
 function WeatherDashboard() {
-  //const [weatherData, setWeatherData] = useState(null);
-  const [weatherData, setWeatherData] = useState(apiData);
-  //const currentDateTime = moment().format('MMMM D, YYYY h:mm A');
-  const currentDateTime = moment(weatherData.current_weather.time).format('MMMM D, YYYY h:mm A');
+  const [weatherData, setWeatherData] = useState(null);
+  //const [weatherData, setWeatherData] = useState(apiData);
+  const currentDateTime = moment().format('MMMM D, YYYY h:mm A');
+  //const currentDateTime = moment(weatherData.current_weather.time).format('MMMM D, YYYY h:mm A');
 
  
-/*   useEffect(() => {
+   useEffect(() => {
     // Realiza la solicitud HTTP a la API utilizando fetch
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=-31.4135&longitude=-64.181&hourly=temperature_2m,relativehumidity_2m')
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=-31.4135&longitude=-64.181&current=temperature_2m,relativehumidity_2m,weathercode,windspeed_10m&hourly=temperature_2m,relativehumidity_2m,weathercode&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,windspeed_10m_max,windgusts_10m_max&timezone=auto')
       .then((response) => {
         if (!response.ok) {
           throw new Error('La solicitud no fue exitosa');
@@ -32,13 +32,15 @@ function WeatherDashboard() {
       })
       .then((data) => {
         // Al recibir los datos, actualiza el estado
+
         console.log('Datos recibidos:', data);
         setWeatherData(data);
+        
       })
       .catch((error) => {
         console.error('Error al obtener datos de la API:', error);
       });
-  }, []); */
+  }, []); 
 
 
   return (
@@ -47,11 +49,13 @@ function WeatherDashboard() {
         {/* Contenido del panel izquierdo */}
         <h2></h2>
         <div className="top-left">
-          <TemperatureClock currentTemperature={weatherData.current_weather.temperature} />
-          {/* Agrega aquí la fecha y hora actual */}
+        {weatherData && weatherData.current && (
+          <TemperatureClock currentTemperature={weatherData.current.temperature_2m} /> 
+          )}
           <div className="current-date-time">
             {currentDateTime}
           </div>
+
         </div>
         <div className="bottom-left">
           {/* Agregar el TemperatureMinMaxCard en la parte inferior izquierda */}
@@ -81,7 +85,7 @@ function WeatherDashboard() {
                 {/* UV INDEX */}
                 <HighlightCard title="UV INDEX" value={weatherData.daily.uv_index_max} />
                 {/* WIND STATUS */}
-                <HighlightCard title="WIND STATUS" value={weatherData.current_weather.windspeed + ' km/h'}/>
+                <HighlightCard title="WIND STATUS" value={weatherData.current.windspeed_10m + ' km/h'}/>
                 {/* SUNRISE & SUNSET */}
                 <HighlightCard title="SUNRISE & SUNSET" sunrise={weatherData.daily.sunrise} sunset={weatherData.daily.sunset}  />
                 {/* HUMIDITY */}
