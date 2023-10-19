@@ -24,10 +24,97 @@ import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
 
 function WeatherDashboard() {
   const [weatherData, setWeatherData] = useState(null);
-  const [transporteData, setTransporteData] = useState([]);
+ // const [transporteData, setTransporteData] = useState([]);
   //const [weatherData, setWeatherData] = useState(apiData);
   const currentDateTime = moment().format('MMMM D, YYYY h:mm A');
   //const currentDateTime = moment(weatherData.current_weather.time).format('MMMM D, YYYY h:mm A');
+
+  const [transporteData, setTransporteData] = useState([
+    {
+      "route_id": "1468",
+      "latitude": -34.64657,
+      "longitude": -58.59802,
+      "speed": 4.444444,
+      "timestamp": 1697581132,
+      "id": "1822",
+      "direction": 0,
+      "agency_name": "MICROOMNIBUS SAAVEDRA S.A.T.A.C.I.",
+      "agency_id": 82,
+      "route_short_name": "153A",
+      "tip_id": "95449-1",
+      "trip_headsign": "a B° Nuevo"
+    },
+    {
+      "route_id": "1464",
+      "latitude": -34.69533,
+      "longitude": -58.6943741,
+      "speed": 2.5,
+      "timestamp": 1697581132,
+      "id": "1827",
+      "direction": 0,
+      "agency_name": "MICROOMNIBUS SAAVEDRA S.A.T.A.C.I.",
+      "agency_id": 82,
+      "route_short_name": "253A",
+      "tip_id": "95220-1",
+      "trip_headsign": "a Liniers"
+    },
+    {
+      "route_id": "1468",
+      "latitude": -34.65996,
+      "longitude": -58.66686,
+      "speed": 3.611111,
+      "timestamp": 1697581132,
+      "id": "1833",
+      "direction": 0,
+      "agency_name": "MICROOMNIBUS SAAVEDRA S.A.T.A.C.I.",
+      "agency_id": 82,
+      "route_short_name": "153A",
+      "tip_id": "95446-1",
+      "trip_headsign": "a B° Nuevo"
+    },
+    {
+      "route_id": "1468",
+      "latitude": -34.64098,
+      "longitude": -58.56669,
+      "speed": 9.444444,
+      "timestamp": 1697581132,
+      "id": "1836",
+      "direction": 0,
+      "agency_name": "MICROOMNIBUS SAAVEDRA S.A.T.A.C.I.",
+      "agency_id": 82,
+      "route_short_name": "153A",
+      "tip_id": "95448-1",
+      "trip_headsign": "a B° Nuevo"
+    },
+    {
+      "route_id": "1467",
+      "latitude": -34.67931,
+      "longitude": -58.66576,
+      "speed": 7.5,
+      "timestamp": 1697581132,
+      "id": "1838",
+      "direction": 1,
+      "agency_name": "MICROOMNIBUS SAAVEDRA S.A.T.A.C.I.",
+      "agency_id": 82,
+      "route_short_name": "321A",
+      "tip_id": "95364-1",
+      "trip_headsign": "a Est. CASTELAR"
+    },
+    {
+      "route_id": "1466",
+      "latitude": -34.67753,
+      "longitude": -58.6653,
+      "speed": 8.333333,
+      "timestamp": 1697581132,
+      "id": "1849",
+      "direction": 0,
+      "agency_name": "MICROOMNIBUS SAAVEDRA S.A.T.A.C.I.",
+      "agency_id": 82,
+      "route_short_name": "321A",
+      "tip_id": "95316-1",
+      "trip_headsign": "a LIBERTAD"
+    }
+  ]);
 
   const customBusIcon = new L.Icon({
     iconUrl: busIcon, // Ruta a tu imagen de colectivo
@@ -59,7 +146,7 @@ function WeatherDashboard() {
       });
 
 
-      const fetchData = async () => {
+   /*    const fetchData = async () => {
         try {
           const response = await fetch('https://apitransporte.buenosaires.gob.ar/colectivos/vehiclePositionsSimple?client_id=cb6b18c84b3b484d98018a791577af52&client_secret=3e3DB105Fbf642Bf88d5eeB8783EE1E6');
           if (!response.ok) {
@@ -83,7 +170,7 @@ function WeatherDashboard() {
       // Limpia el intervalo cuando el componente se desmonta
       return () => {
         clearInterval(intervalId);
-      };
+      }; */
   }, []); 
   const firstFiveData = transporteData.slice(0, 5);
 
