@@ -323,3 +323,24 @@ body {
 .leaflet-container {
   height: 50vh;
 }
+
+/* Estilo para el select personalizado */
+.custom-select {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilo para las opciones */
+.custom-select option {
+  background-color: #fff;
+  color: #000;
+  font-size: 14px;
+}
+
+/* Estilo cuando se selecciona una opción */
+.custom-select option:checked {
+  background-color: #007bff;
+  color: #fff;
+}
