@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/ArgProgAPI/static/css/main.978d2847.css",
-    "main.js": "/ArgProgAPI/static/js/main.f35eb955.js",
+    "main.css": "/ArgProgAPI/static/css/main.0fa7ba70.css",
+    "main.js": "/ArgProgAPI/static/js/main.97b479b0.js",
     "static/media/bus_icon.png": "/ArgProgAPI/static/media/bus_icon.ccd3b992e72fd3894ef4.png",
     "index.html": "/ArgProgAPI/index.html",
-    "main.978d2847.css.map": "/ArgProgAPI/static/css/main.978d2847.css.map",
-    "main.f35eb955.js.map": "/ArgProgAPI/static/js/main.f35eb955.js.map"
+    "main.0fa7ba70.css.map": "/ArgProgAPI/static/css/main.0fa7ba70.css.map",
+    "main.97b479b0.js.map": "/ArgProgAPI/static/js/main.97b479b0.js.map"
   },
   "entrypoints": [
-    "static/css/main.978d2847.css",
-    "static/js/main.f35eb955.js"
+    "static/css/main.0fa7ba70.css",
+    "static/js/main.97b479b0.js"
   ]
 }
