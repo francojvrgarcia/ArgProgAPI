@@ -35,7 +35,7 @@ function WeatherDashboard() {
   });
 
   useEffect(() => {
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=-31.4135&longitude=-64.181&current=temperature_2m,relativehumidity_2m,weathercode,windspeed_10m&hourly=temperature_2m,relativehumidity_2m,weathercode&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,windspeed_10m_max,windgusts_10m_max&timezone=auto')
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=-31.4135&longitude=-64.181&current=temperature_2m,relativehumidity_2m,weathercode,windspeed_10m&hourly=temperature_2m,relativehumidity_2m,visibility,weathercode&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,windspeed_10m_max,windgusts_10m_max&timezone=auto')
       .then((response) => {
         if (!response.ok) {
           throw new Error('La solicitud no fue exitosa');
@@ -74,6 +74,7 @@ function WeatherDashboard() {
 
   return (
     <>
+      <div className='route-info' >
       <div className="combo-select">
         <label htmlFor="selectRoute">Selecciona una ruta:</label>
         <select
@@ -108,9 +109,12 @@ function WeatherDashboard() {
           <option value="2684">Ciudadela - Cañuelas</option>
           <option value="2685">Ciudadela - Ruta 3</option>
         </select>
-        {!transporteData || transporteData.length === 0 ? (
-        <p>No hay datos disponibles</p>
-      ) : null}
+        </div>
+        { !transporteData || transporteData.length === 0 ?  (
+          <div className="alert alert-danger">
+            <p>No hay datos disponibles</p>
+          </div>
+        ) : null}
       </div>
       
         <MapContainer
@@ -160,14 +164,13 @@ function WeatherDashboard() {
           <div className="right-panel">
             {weatherData && weatherData.hourly && (
               <>
-                <div className="top-right">
+              
+                <div className="bottom-right">
+                  <div className="humidity-grid">
                   <TemperatureChart
                     timeLabels={weatherData.hourly.time}
                     temperatureData={weatherData.hourly.temperature_2m}
                   />
-                </div>
-                <div className="bottom-right">
-                  <div className="humidity-grid">
                     <HighlightCard title="UV INDEX" value={weatherData.daily.uv_index_max} />
                     <HighlightCard title="WIND STATUS" value={weatherData.current.windspeed_10m + ' km/h'} />
                     <HighlightCard title="SUNRISE & SUNSET" sunrise={weatherData.daily.sunrise} sunset={weatherData.daily.sunset} />

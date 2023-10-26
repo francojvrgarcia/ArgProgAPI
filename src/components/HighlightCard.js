@@ -8,7 +8,7 @@ function HighlightCard({ title, value, sunrise, sunset, data }) {
 
   const getCurrentHumidity = () => {
     if (title === 'HUMIDITY' && data) {
-      const targetDate = moment('2023-10-03T12:00:00');
+      const targetDate = moment();
       const currentTime = targetDate.toISOString();
       const index = data.time.findIndex((time) => {
         return moment(currentTime).isSame(time, 'hour');
@@ -27,7 +27,7 @@ function HighlightCard({ title, value, sunrise, sunset, data }) {
   const getVisibilityForDate = () => {
  
     if (title === 'VISIBILITY' && data) {
-      const targetDate =  moment('2023-10-03T12:00:00');
+      const targetDate =  moment();
       const currentTime = targetDate.toISOString();
       const index = data.time.findIndex((time) => {
         return moment(currentTime).isSame(time, 'hour');

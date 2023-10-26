@@ -34,7 +34,7 @@ body {
 .bottom-right {
   flex: 3;
   padding: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+
 }
 
 
@@ -68,7 +68,7 @@ body {
 
 .humidity-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* Tres columnas de igual tamaño */
+  grid-template-columns: repeat(4, 2fr); /* Tres columnas de igual tamaño */
   gap: 10px; /* Espacio entre tarjetas */
   grid-template-rows: repeat(1, auto); /* Dos filas de alto automático */
 }
@@ -87,8 +87,8 @@ body {
 
 .clock-container {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   margin: 0 auto;
   background-color: #f0f0f0;
   border-radius: 50%;
@@ -150,19 +150,19 @@ body {
   .min-temperature-card {
     width: 100px; /* Ajusta el tamaño para pantallas más pequeñas si es necesario */
     height: 100px; /* Ajusta el tamaño para pantallas más pequeñas si es necesario */
-    font-size: 14px; /* Ajusta el tamaño de la fuente para pantallas más pequeñas si es necesario */
+    font-size: 18px; /* Ajusta el tamaño de la fuente para pantallas más pequeñas si es necesario */
   }
 }
 
 
 .max-temperature-label,
 .min-temperature-label {
-  font-size: 24px;
+  font-size: 18px;
 }
 
 .max-temperature-value,
 .min-temperature-value {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
 }
 
@@ -172,15 +172,7 @@ body {
   margin: 20px;
 }
 
-.clock-container {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  margin: 0 auto;
-  background-color: #f0f0f0;
-  border-radius: 50%;
-  overflow: hidden; /* Para ocultar la aguja que sobresale del círculo */
-}
+
 
 .clock {
   position: relative;
@@ -213,23 +205,6 @@ body {
   font-weight: bold;
 }
 
-
-
-
-.analog-clock {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.clock {
-  width: 200px;
-  height: 200px;
-  border: 2px solid #333;
-  border-radius: 50%;
-  position: relative;
-}
 
 .hour-hand,
 .minute-hand,
@@ -343,4 +318,23 @@ body {
 .custom-select option:checked {
   background-color: #007bff;
   color: #fff;
+}
+
+.alert {
+  margin-bottom: 1.429rem;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  color: #FFF
+}
+
+.alert.alert-danger {
+  background-color: #ef1c1c;
+  border-color: #EF5350
+}
+
+.combo-select {
+}
+
+.route-info{
+  display: flex;
 }

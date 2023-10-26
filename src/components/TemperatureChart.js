@@ -56,7 +56,7 @@ function TemperatureChart({ timeLabels, temperatureData }) {
   };
 
   return (
-    <div className="temperature-chart-container">
+    <div className="temperature-chart-container humidity-card" >
       <Bar data={chartData} options={chartOptions} />
     </div>
   );
