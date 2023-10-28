@@ -3,8 +3,6 @@ import moment from 'moment'; // Importa la librería moment
 
 function TemperatureMinMaxCard({ maxTemperature, minTemperature }) {
   
-   console.log('max', maxTemperature);
-   console.log('min', minTemperature)
 
   // Calcula un color de fondo degradado en función de la temperatura máxima y mínima
   const gradientColor = `linear-gradient(90deg, #FF5733 ${maxTemperature}%, #e5a733 ${minTemperature}%)`;

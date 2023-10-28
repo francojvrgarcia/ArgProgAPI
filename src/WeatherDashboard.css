@@ -329,12 +329,26 @@ body {
 
 .alert.alert-danger {
   background-color: #ef1c1c;
-  border-color: #EF5350
+  border-color: #EF5350;
+  font-size: 14px;
+  padding: 5px;
+  height: 25px;
+  margin: 0 auto !important;
 }
 
 .combo-select {
+  padding: 10px;
 }
 
 .route-info{
+  flex: 1 1;
   display: flex;
+}
+
+.mensaje{
+  padding: 10px;
+}
+
+.countdown{
+padding: 5px;
 }
