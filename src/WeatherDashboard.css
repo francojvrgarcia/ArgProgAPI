@@ -352,3 +352,39 @@ body {
 .countdown{
 padding: 5px;
 }
+
+.options-list {
+  position: absolute;
+  z-index: 2000 !important;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.option {
+  padding: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.option:hover {
+  background-color: #f2f2f2;
+}
+
+input[type="text"] {
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
+  background-color: #fff;
+  transition: border-color 0.3s ease; /* Efecto de transición para el borde */
+}
+
+input[type="text"]:focus {
+  border-color: #007bff; /* Cambiar el borde al enfocar el input */
+  outline: none; /* Quitar el borde predeterminado del enfoque */
+}
