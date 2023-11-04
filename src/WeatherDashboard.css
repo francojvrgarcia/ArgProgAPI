@@ -341,8 +341,7 @@ body {
 }
 
 .route-info{
-  flex: 1 1;
-  display: flex;
+
 }
 
 .mensaje{
@@ -375,7 +374,7 @@ padding: 5px;
 }
 
 input[type="text"] {
-  width: 100%;
+  width: 50%;
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 5px;
@@ -387,4 +386,60 @@ input[type="text"] {
 input[type="text"]:focus {
   border-color: #007bff; /* Cambiar el borde al enfocar el input */
   outline: none; /* Quitar el borde predeterminado del enfoque */
+}
+
+/* Estilos para los resultados de búsqueda */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: #f0f0f0;
+}
+
+.search-container {
+  position: relative; /* Asegura que los resultados de la búsqueda no se superpongan al buscador */
+}
+
+/* Estilo para el campo de entrada */
+.search-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top:10px;
+}
+
+/* Estilo para la lista de resultados de la búsqueda */
+.search-results {
+  position: absolute;
+  z-index: 1; /* Coloca la lista por encima de otros elementos */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 150px; /* Limita la altura de la lista para hacerla desplazable si hay muchos resultados */
+  overflow-y: auto; /* Agrega desplazamiento vertical si es necesario */
+}
+
+/* Estilo para los elementos de la lista de resultados */
+.search-result {
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Estilo para resaltar elementos en la lista de resultados al pasar el mouse */
+.search-result:hover {
+  background-color: #f0f0f0;
 }

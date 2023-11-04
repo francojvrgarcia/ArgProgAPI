@@ -17,6 +17,9 @@ import Transporte from './Transporte';
 
 function WeatherDashboard() {
   const [weatherData, setWeatherData] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showSearchResults, setShowSearchResults] = useState(false); // Nuevo estado
   const currentDateTime = moment().format('MMMM D, YYYY h:mm A');
   const [selectedOption, setSelectedOption] = useState('');
   const [route_id, setRouteId] = useState('');
@@ -31,11 +34,9 @@ function WeatherDashboard() {
   });
   const [countdown, setCountdown] = useState(31);
 
-  const fetchData = async () => {
+  const fetchWeatherData = async (latitude, longitude) => {
     try {
-      const response = await fetch(
-        'https://api.open-meteo.com/v1/forecast?latitude=-31.4135&longitude=-64.181&current=temperature_2m,relativehumidity_2m,weathercode,windspeed_10m&hourly=temperature_2m,relativehumidity_2m,visibility,weathercode&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,windspeed_10m_max,windgusts_10m_max&timezone=auto'
-      );
+      const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relativehumidity_2m,weathercode,windspeed_10m&hourly=temperature_2m,relativehumidity_2m,visibility,weathercode&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,windspeed_10m_max,windgusts_10m_max&timezone=auto`);
       if (!response.ok) {
         throw new Error('La solicitud no fue exitosa');
       }
@@ -43,39 +44,82 @@ function WeatherDashboard() {
       console.log('Datos recibidos:', data);
       setCountdown(31);
       setWeatherData(data);
+      setShowSearchResults(false); // Ocultar los resultados de la búsqueda al obtener datos
     } catch (error) {
       console.error('Error al obtener datos de la API:', error);
     }
   };
 
+  const handleSearchInputChange = (event) => {
+    const inputValue = event.target.value;
+    setSearchQuery(inputValue);
+    
+    // Verificar que la longitud de la cadena de búsqueda sea mayor o igual a 3
+    if (inputValue.length >= 3) {
+      searchLocation(); // Realizar búsqueda en tiempo real al cambiar el valor
+    } else {
+      // Limpiar los resultados si la longitud es menor a 3 caracteres
+      setSearchResults([]);
+      setShowSearchResults(false); // Ocultar los resultados de la búsqueda si la longitud es menor
+    }
+  };
 
+  const searchLocation = async () => {
+    try {
+      const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${searchQuery}&count=10&language=en&format=json`);
+      if (!response.ok) {
+    
+      }
+      const data = await response.json();
+      setSearchResults(data.results);
+      setShowSearchResults(true); // Mostrar los resultados de la búsqueda
+    } catch (error) {
+      console.error('Error al buscar la ubicación:', error);
+    }
+  };
 
   useEffect(() => {
-    const weatherDataIntervalId = setInterval(fetchData, 31000);
+    const weatherDataIntervalId = setInterval(fetchWeatherData, 31000);
 
-
-    fetchData();
- 
+    fetchWeatherData();
 
     return () => {
       clearInterval(weatherDataIntervalId);
-
     };
   }, [route_id, selectedOption]);
 
-
-
-
+  const handleResultClick = (result) => {
+    const { latitude, longitude } = result;
+    fetchWeatherData(latitude, longitude);
+  };
 
   return (
     <>
-
-
-      <Transporte  />
-
-
+      <Transporte />
 
       <div className="weather-dashboard">
+        <div className="search-container">
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Escribe una ubicación..."
+            value={searchQuery}
+            onChange={handleSearchInputChange}
+          />
+          {showSearchResults && searchResults.length > 0 && (
+            <ul className="search-results">
+              {searchResults.map((result) => (
+                <li
+                  key={result.id}
+                  className="search-result"
+                  onClick={() => handleResultClick(result)}
+                >
+                  {result.name}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
         <div className="top-panel">
           <div className="left-panel">
             <h2></h2>

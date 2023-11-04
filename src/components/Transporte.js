@@ -97,7 +97,7 @@ function Transporte() {
         <div className="combo-select">
           <input
             type="text"
-            placeholder="Filtrar opciones..."
+            placeholder="Escribe una ruta..."
             value={searchTerm}
             onClick={handleSearchClick}
             onChange={(e) => {
@@ -139,7 +139,7 @@ function Transporte() {
         center={[-34.6118, -58.4173]}
         zoom={9}
         scrollWheelZoom={false}
-        style={{ marginTop: '20px' }}
+        style={{ height: '350px' }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
