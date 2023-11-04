@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+Weather Dashboard App
+La Weather Dashboard App es una aplicación web que proporciona información meteorológica en tiempo real y datos de seguimiento de rutas de transporte público en Buenos Aires. Esta aplicación utiliza datos de fuentes externas y ofrece una interfaz de usuario intuitiva para obtener información actualizada.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Funcionalidades
+Visualiza datos meteorológicos en tiempo real, incluyendo la temperatura, la humedad, la velocidad del viento, la visibilidad, el índice UV y más.
+Muestra la temperatura máxima y mínima del día, así como la hora de salida y puesta del sol.
+Rastrea la ubicación en tiempo real de los autobuses en rutas específicas de Buenos Aires en un mapa interactivo.
+Filtra y selecciona una ruta de autobús específica.
+Actualiza automáticamente los datos de clima y transporte cada 31 segundos.
+Tecnologías Utilizadas
+React
+Chart.js y Moment.js para la representación gráfica de datos.
+Leaflet para la visualización de mapas y marcadores de autobuses.
+Fetch API para obtener datos de fuentes externas.
+Instalación
+Clona el repositorio:
 
-## Available Scripts
+bash
+Copy code
+git clone <URL del repositorio>
+cd weather-dashboard-app
+Instala las dependencias:
 
-In the project directory, you can run:
+bash
+Copy code
+npm install
+Inicia la aplicación:
 
-### `npm start`
+bash
+Copy code
+npm start
+Abre tu navegador y visita http://localhost:3000 para ver la aplicación en funcionamiento.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Uso
+Al abrir la aplicación, verás un campo de búsqueda que te permite filtrar y seleccionar una ruta de autobús específica en Buenos Aires.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Después de seleccionar una ruta, la aplicación mostrará un mapa interactivo con la ubicación en tiempo real de los autobuses en esa ruta.
 
-### `npm test`
+En la parte superior, encontrarás información meteorológica en tiempo real, incluyendo la temperatura actual, la hora actual, y otros detalles relacionados con el clima.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+La parte inferior derecha muestra datos detallados como el índice UV, la velocidad del viento, la humedad, la visibilidad y más.
 
-### `npm run build`
+La aplicación se actualiza automáticamente cada 31 segundos para garantizar que siempre tengas datos actualizados.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
