@@ -19,7 +19,6 @@ function WeatherDashboard() {
   const [weatherData, setWeatherData] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [showSearchResults, setShowSearchResults] = useState(false); // Nuevo estado
   const currentDateTime = moment().format('MMMM D, YYYY h:mm A');
   const [selectedOption, setSelectedOption] = useState('');
   const [route_id, setRouteId] = useState('');
@@ -44,7 +43,6 @@ function WeatherDashboard() {
       console.log('Datos recibidos:', data);
       setCountdown(31);
       setWeatherData(data);
-      setShowSearchResults(false); // Ocultar los resultados de la búsqueda al obtener datos
     } catch (error) {
       console.error('Error al obtener datos de la API:', error);
     }
@@ -60,7 +58,6 @@ function WeatherDashboard() {
     } else {
       // Limpiar los resultados si la longitud es menor a 3 caracteres
       setSearchResults([]);
-      setShowSearchResults(false); // Ocultar los resultados de la búsqueda si la longitud es menor
     }
   };
 
@@ -68,29 +65,22 @@ function WeatherDashboard() {
     try {
       const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${searchQuery}&count=10&language=en&format=json`);
       if (!response.ok) {
-    
+
       }
       const data = await response.json();
       setSearchResults(data.results);
-      setShowSearchResults(true); // Mostrar los resultados de la búsqueda
     } catch (error) {
       console.error('Error al buscar la ubicación:', error);
     }
   };
 
-  useEffect(() => {
-    const weatherDataIntervalId = setInterval(fetchWeatherData, 31000);
-
-    fetchWeatherData();
-
-    return () => {
-      clearInterval(weatherDataIntervalId);
-    };
-  }, [route_id, selectedOption]);
-
   const handleResultClick = (result) => {
     const { latitude, longitude } = result;
+    setSelectedOption(result);
     fetchWeatherData(latitude, longitude);
+
+    // Limpiar los resultados después de hacer clic en una opción
+    setSearchResults([]);
   };
 
   return (
@@ -98,28 +88,29 @@ function WeatherDashboard() {
       <Transporte />
 
       <div className="weather-dashboard">
-        <div className="search-container">
-          <input
-            type="text"
-            className="search-input"
-            placeholder="Escribe una ubicación..."
-            value={searchQuery}
-            onChange={handleSearchInputChange}
-          />
-          {showSearchResults && searchResults.length > 0 && (
-            <ul className="search-results">
-              {searchResults.map((result) => (
-                <li
-                  key={result.id}
-                  className="search-result"
-                  onClick={() => handleResultClick(result)}
-                >
-                  {result.name}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Escribe una ubicación..."
+          value={searchQuery}
+          onChange={handleSearchInputChange}
+        />
+        {searchResults.length > 0 && (
+          <ul className="search-results">
+            {searchResults.map((result) => (
+              <li
+                key={result.id}
+                className="search-result"
+                onClick={() => handleResultClick(result)}
+              >
+                {result.name}&nbsp;(&nbsp;{result.admin1}&nbsp;{result.admin2}&nbsp;{result.admin3}&nbsp;{result.admin4}&nbsp;)
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      
         <div className="top-panel">
           <div className="left-panel">
             <h2></h2>
@@ -159,6 +150,7 @@ function WeatherDashboard() {
           </div>
         </div>
       </div>
+   
     </>
   );
 }
